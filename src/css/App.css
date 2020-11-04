@@ -1,0 +1,83 @@
+/* .App {
+  text-align: center;
+  color: black !important;
+} */
+.navbar .nav-item a{
+  /* font-size: 12px; */
+  width: 110px;
+  font-weight: 550;
+}
+.navbar img{
+  width: 20%;
+}
+.navbar ul{
+  margin: auto auto 0px auto
+}
+a{
+  color: black !important;
+}
+.home-img{
+  height: 700px;
+  overflow-y: hidden;
+}
+.home-img img{
+  /* background-image: url(./imgs/home.jpg); */
+  width: 100%;
+  /* height: 700px; */
+  /* overflow-y: hidden; */
+  /* background-size: cover; */
+  /* position: absolute; */
+}
+
+.search{
+  /* margin-bottom: 500px !important; */
+}
+.search .row{
+  margin-bottom: 200px;
+}
+.search > div >  div{
+  background-color: lightblue;
+  border-right: 2px solid gray;
+  /* flex:1 */
+}
+.search .button > div{
+  position: relative;
+  top:35%;
+  text-align: center;
+  /* padding:5px */
+}
+
+.search .dropdown{
+  flex:3
+}
+.search .explore-btn{
+  flex:1
+}
+.search .search-btn{
+  flex:2
+}
+.search p{
+  margin-bottom: 10px
+}
+.search .btn{
+  width: 100%;
+}
+.search .dropdown{
+  /* background-color: lightblue; */
+}
+.search .dropdown-menu{    
+  background-color: lightblue;
+  width: 100%;
+}
+.search input[type="text"]{
+  background-color: lightblue;
+  border: 1px solid gray;
+  padding: 4px 0px 4px 8px;
+  width: 100%;
+}
+.search input[type="text"]:focus{
+  /* border: 0px; */
+  outline-color: gray;
+  /* outline-style: none; */
+}
+
