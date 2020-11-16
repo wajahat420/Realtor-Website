@@ -1,0 +1,35 @@
+.home-div .row div{
+      flex:1
+}
+.home-div .explain{
+      font-size: 14px;
+}
+.home-div i{
+      padding-right: 5px;
+}
+.home-div span, .home-div .explain{
+      color: rgb(128, 128, 128);
+}
+.home-div img + div > p{
+      /* top: 0; */
+}
+.home-div div.position-absolute p{
+      width: 100px;
+      background-color: rgb(98, 98, 98);
+      color: white;
+      font-size: 19px;
+      padding: 5px;
+}
+.home-div div.position-absolute p:hover{
+      cursor: pointer;
+      transition: all 0.3s ease-in;
+      width: 110px;
+      background-color: white;
+      color: black;
+}
+.home-div .msg,.home-div .call{
+      top: 48px;
+}
+.home-div .call{
+      right: 48px
+}
