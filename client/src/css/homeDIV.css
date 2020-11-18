@@ -1,6 +1,9 @@
 .home-div .row div{
       flex:1
 }
+.home-div h4, .home-div p, .home-div h3{
+      color: rgb(59, 59, 59) ;
+}
 .home-div .explain{
       font-size: 14px;
 }
@@ -10,9 +13,7 @@
 .home-div span, .home-div .explain{
       color: rgb(128, 128, 128);
 }
-.home-div img + div > p{
-      /* top: 0; */
-}
+
 .home-div div.position-absolute p{
       width: 100px;
       background-color: rgb(98, 98, 98);

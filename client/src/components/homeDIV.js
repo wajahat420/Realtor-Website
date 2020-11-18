@@ -1,10 +1,10 @@
 import React from 'react'
 import "../css/homeDIV.css"
 import Image from "../imgs/home.jpg"
-export default function homeDIV() {
+export default function homeDIV(props) {
       return (
             <div className="col-4 position-relative m-auto p-5 m-0  home-div text-center">
-                  <img className="col-12 p-0" src={Image}/>
+                  <img className="col-12 p-0" src={props.img}/>
                   <div className="position-absolute msg">
                         <p >message</p>
                   </div>
@@ -12,24 +12,24 @@ export default function homeDIV() {
                         <p>call</p>
                   </div>
                   <div className="border">
-                        <h4 className="col-12 mt-4">Home in Merrick Way</h4>
-                        <p className="col-12 p-0 explain">Enchanting three bedroom, three bath home with spacious one bedroom, one bath… </p>
+                        <h4 className="col-12 mt-4">{props.location}</h4>
+                        <p className="col-12 p-0 explain">{props.desc}</p>
                         <div className="row p-0 m-0 ">
                               <div>
                                     <p><b>Bedrooms</b></p>
-                                    <span><i class="fa fa-bed" aria-hidden="true"></i>3</span>
+                                    <span><i class="fa fa-bed" aria-hidden="true"></i>{props.bedrooms}</span>
                               </div>
                               <div>
                                     <p><b>Bathrooms</b></p>
-                                    <span><i class="fa fa-bath" aria-hidden="true"></i>4</span>
+                                    <span><i class="fa fa-bath" aria-hidden="true"></i>{props.bathrooms}</span>
                               </div>
                               <div>
                                     <p><b>Area</b></p>
-                                    <span><i class="fa fa-object-group" aria-hidden="true"></i>5 sq ft</span>
+                                    <span><i class="fa fa-object-group" aria-hidden="true"></i>{props.area}</span>
                               </div>     
                         </div>{/* row end  */}
-                        <p className="col-12 p-0 sale">For Sale</p>
-                        <h3 className="col-12 p-0 ">$540,000</h3>
+                        <p className="col-12 p-0 mt-4 mb-2 sale">{props.rentORsale}</p>
+                        <h3 className="col-12 p-0 ">{props.price}</h3>
                   </div>
 
             </div>
