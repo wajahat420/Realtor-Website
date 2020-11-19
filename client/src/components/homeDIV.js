@@ -1,7 +1,7 @@
 import React from 'react'
 import "../css/homeDIV.css"
 import Image from "../imgs/home.jpg"
-export default function homeDIV(props) {
+export default function  homeDIV(props) {
       return (
             <div className="col-4 position-relative m-auto p-5 m-0  home-div text-center">
                   <img className="col-12 p-0" src={props.img}/>

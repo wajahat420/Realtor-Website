@@ -14,8 +14,8 @@ export default class search extends Component {
                   propertyType : "Property Type (Any)",
                   propertyStatus : "Property Status (Any)",
                   propertyID : "Property ID",
-                  minArea : "Min Area (Any)",
-                  maxArea : "Max Area (Any)",
+                  minArea : "Min Area (Sq Yd)",
+                  maxArea : "Max Area (Sq Yd)",
                   minBeds : "Min Beds (Any)",
                   minPrice : "Min Price (Any)",
                   maxPrice : "Max Price (Any)",
@@ -32,8 +32,8 @@ export default class search extends Component {
             this.oneToten = [1,2,3,4,5,6,7,8,9,10]
             this.propertyType = ["Property Type (Any)","Commercial","-Office","-Shop","Resedential","-Apartment","-Apartment Building","-Condominium","-Single Family","-Villa"]
             // this.propertyStatus = ["Property Status (Any)","For Rent","For Sale"]
-            this.minArea = ["Min Area (Any)",0,10,20,30,40,50,60,70,80,90,100,110,120]
-            this.maxArea = ["Max Area (Any)",80,80,100,110,120,140,200]
+            this.minArea = ["Min Area (Sq Yd)",0,10,20,30,40,50,60,70,80,90,100,110,120]
+            this.maxArea = ["Max Area (Sq Yd)",80,80,100,110,120,140,200]
             this.minBeds = ["Min Beds (Any)",2,3,4,5,6,7,8,9,10]
             this.minPrice = ["Min Price (Any)","0","5000","10,1000","15,000","20,000","25,2000","30,000","50,000","60,000"]
             this.maxPrice = ["Max Price (Any)","5000","10,1000","15,000","20,000","25,2000","30,000","50,000","60,000","70,000","80,000","90,000","100,000"]
@@ -92,6 +92,7 @@ export default class search extends Component {
             }
             
       }
+
       render() {
             return (
                   <div onClick={this.closeDetails} className="search  col-md-10">
@@ -176,10 +177,6 @@ export default class search extends Component {
                                                 )}
                                           </ul>
                                     </div>
-                              
-                                    <div className="dropdown " >
-                                          <input onChange={(e)=> this.copyDetailedSearch["propertyID"] = e.target.value} type="text" class="btn " placeholder="Property id"/>
-                                    </div>
                                     <div className="dropdown " >
                                           <button type="button" class="btn dropdown-toggle " data-toggle="dropdown">{this.state.detailedSearch["minArea"]}</button>
                                           <ul className="dropdown-menu">
@@ -196,16 +193,13 @@ export default class search extends Component {
                                                 {this.maxArea.map((elem,key)=>
                                                       <li onClick={()=>this.changeValueOfDetailedSearch("maxArea",elem)}key={key}>{elem}</li>
                                                 )}
-                                          </ul>                                    </div>
-                                    <div className="dropdown " >
-                                          <button type="button" class="btn dropdown-toggle " data-toggle="dropdown">{this.state.detailedSearch["minBeds"]}</button>
-                                          <ul className="dropdown-menu">
-                                                <li><input onChange={(e)=>this.changeValueOfDetailedSearch("minBeds","",e.target.value,"input")} type="text"/></li>
-                                                {this.minBeds.map((elem,key)=>
-                                                      <li onClick={()=>this.changeValueOfDetailedSearch("minBeds",elem)}key={key}>{elem}</li>
-                                                )}
-                                          </ul>
+                                          </ul>                                    
                                     </div>
+                                   
+                                    <div className="dropdown " >
+                                          <input onChange={(e)=> this.copyDetailedSearch["propertyID"] = e.target.value} type="text" class="btn " placeholder="Property id"/>
+                                    </div>
+                                   
                                     <div className="dropdown " >
                                           <button type="button" class="btn dropdown-toggle " data-toggle="dropdown">{this.state.detailedSearch["minPrice"]}</button>
                                           <ul className="dropdown-menu">
@@ -219,11 +213,25 @@ export default class search extends Component {
                                           <button type="button" class="btn dropdown-toggle " data-toggle="dropdown">{this.state.detailedSearch["maxPrice"]}</button>
                                           <ul className="dropdown-menu">
                                                 <li><input onChange={(e)=>this.changeValueOfDetailedSearch("maxPrice","",e.target.value,"input")} type="text"/></li>
-                                                {this.maxPrice.map((elem,key)=>
-                                                      <li onClick={()=>this.changeValueOfDetailedSearch("maxPrice",elem)}key={key}>{elem}</li>
+                                                {this.maxPrice.map((elem,key)=>{
+                                                      // if(elem)
+                                                      return(
+                                                            <li onClick={()=>this.changeValueOfDetailedSearch("maxPrice",elem)}key={key}>{elem}</li>
+                                                      )
+                                                }
                                                 )}
                                           </ul>
                                     </div>
+                                    <div className="dropdown " >
+                                          <button type="button" class="btn dropdown-toggle " data-toggle="dropdown">{this.state.detailedSearch["minBeds"]}</button>
+                                          <ul className="dropdown-menu">
+                                                <li><input onChange={(e)=>this.changeValueOfDetailedSearch("minBeds","",e.target.value,"input")} type="text"/></li>
+                                                {this.minBeds.map((elem,key)=>
+                                                      <li onClick={()=>this.changeValueOfDetailedSearch("minBeds",elem)}key={key}>{elem}</li>
+                                                )}
+                                          </ul>
+                                    </div>
+                                    
                                     <div className="dropdown " >
                                           <button type="button" class="btn dropdown-toggle " data-toggle="dropdown">{this.state.detailedSearch["locality"]}</button>
                                           <ul className="dropdown-menu">

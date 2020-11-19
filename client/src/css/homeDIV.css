@@ -1,10 +1,14 @@
 .home-div .row div{
       flex:1
 }
+.home-div img{
+      height: 230px;
+}
 .home-div h4, .home-div p, .home-div h3{
       color: rgb(59, 59, 59) ;
 }
 .home-div .explain{
+      height: 40px;
       font-size: 14px;
 }
 .home-div i{
