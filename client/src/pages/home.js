@@ -20,6 +20,7 @@ import home14 from "../imgs/home14.jpeg"
 import home15 from "../imgs/home15.jpeg"
 import home16 from "../imgs/home16.jpeg"
 
+import axios from "axios"
 
 export default class Home extends React.Component {
       state = {
@@ -46,26 +47,41 @@ export default class Home extends React.Component {
                   ]
 
       }
-      componentDidMount(){
-            let homeDtails = this.state.homesDetails
-            homeDtails.forEach((element,index) => {
-                  const elemPrice = element.price.toLowerCase()
-                  const thousand = elemPrice.includes("thousand")
-                  // const lac = elemPrice.includes("thousand")
-                  const crore = elemPrice.includes("crore")
+      componentWillUnmount(){
+            
 
-                  if(thousand){
-                        homeDtails[index]["intPrice"] = parseFloat(elemPrice) * 1000
-                  }else if(crore){
-                        homeDtails[index]["intPrice"] = parseFloat(elemPrice) * 10000000
-                  }else{
-                        homeDtails[index]["intPrice"] = parseFloat(elemPrice) * 100000
-                  }
-                  // console.log("index",index)
-                  console.log(homeDtails[index])
-            });
+      }
+      componentDidMount(){
+            this.state.homesDetails.forEach(elem=>{
+                  console.log(elem.city)
+                  axios({
+                        method: 'post',
+                        url: '/sendHomeDetails',
+                        data: {
+                              city : elem.city,
+                              heading: elem.heading,
+                              location : elem.location,
+                              img: elem.img,
+                              desc: elem.desc,
+                              price : elem.price,
+                              bedrooms : elem.bedrooms,
+                              bathrooms : elem.bathrooms,
+                              area : elem.area,
+                              rentORsale : elem.rentORsale,
+                              type : elem.type
+                        }
+                  })
+                  .then(res=>{
+                        console.log("res from react",res)
+                  }).catch(err=>{
+                        console.log("err",err)
+                  })
+            })
+            
+
       }
       render(){
+
             return (
                   <div>
                         <Header/>
