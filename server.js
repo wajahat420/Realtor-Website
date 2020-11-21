@@ -52,7 +52,7 @@ app.post("/sendHouseDeatils",(req,res)=>{
     async function findAndUpdate(){
         home.save()
         .then(()=>console.log("home-details send to DB"))
-        .catch(err=>console.log("error =>",err))
+        .catch(err=>console.log("error =>",err)) 
     
         var found = null
         await clientDetails.findOneAndUpdate({phoneNo:req.body.phoneNo}, {$push: { propertyIDs: id }},{new: true},(err, doc) => {
@@ -63,6 +63,7 @@ app.post("/sendHouseDeatils",(req,res)=>{
                 console.log("property =",doc)
             }
         });
+        
         if(found == null){
             console.log("found = ")
 
