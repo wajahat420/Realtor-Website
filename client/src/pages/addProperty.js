@@ -1,10 +1,12 @@
 import axios from "axios"
 import React, { Component } from 'react'
+import "../css/addProperty.css"
 
 export default class addProperty extends Component {
       constructor(){
             super()
             this.count = [1,2,3,4,5,6,7,8,9,10]
+            this.stateCopy = this.state
       }
       state = {
             rentORsale: "",
@@ -21,7 +23,8 @@ export default class addProperty extends Component {
             city : "",
             phoneNo:  "",
             email : "",
-            clientAddress : ""
+            clientAddress : "",
+            imageURL : ''
       }
       uploadData=()=>{
             console.log("jjj")
@@ -31,7 +34,11 @@ export default class addProperty extends Component {
                   data: this.state
             })
             .then(res=>{
-                  console.log("res from react",res)
+                  // if(res.data == "success"){
+                  //       // const duplicat = {...this.state}
+                  //       this.state = this.stateCopy
+                  //       console.log("res from react",res)
+                  // }
             }).catch(err=>{
                   console.log("err",err)
             })
@@ -64,7 +71,7 @@ export default class addProperty extends Component {
       render() {
             console.log(this.state)
             return (
-                  <div className="col-md-12">
+                  <div className="col-md-12 addProperty">
                         <div className="col-md-8 ml-auto mr-auto mt-5">
                               <div className="row">
                                     <span className="col-3"><p>purpose</p></span>
@@ -177,8 +184,8 @@ export default class addProperty extends Component {
                                     
                               </div>
                               <div>
-                                    <input type="file"/>
-                                    {/* <img src={}/> */}
+                                    <input onChange={this.file} type="file"/>
+                                    <img src={this.state.imageURL}/>
                               </div>
                         </div>
                   </div>

@@ -9,8 +9,8 @@ export default function App() {
             <div>
                 {/* <IndexRoute component = {AddProperty} /> */}
                 {/* <Route path = "home" component = {Home} /> */}
-                <Route path = "/" component = {AddProperty} />
-
+                <Route path = "/" component = {Home} />
+                <Route path = "/addProperty" component = {AddProperty} />
             </div>
     )
 }

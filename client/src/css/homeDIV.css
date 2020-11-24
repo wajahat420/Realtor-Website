@@ -15,6 +15,7 @@
       padding-right: 5px;
 }
 .home-div span, .home-div .explain{
+      overflow: hidden;
       color: rgb(128, 128, 128);
 }
 

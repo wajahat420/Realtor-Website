@@ -7,6 +7,7 @@ const homeDetails = require("./models/homeDetails")
 const clientDetails = require("./models/client")
 
 const url = "mongodb+srv://wajahat:node123@first.uba9r.mongodb.net/realtor?retryWrites=true&w=majority"
+// const url = "mongodb://db1.example.net:27017,db2.example.net:2500/?replicaSet=test&connectTimeoutMS=300000"
 const connectionParams={
     useNewUrlParser: true,
     useCreateIndex: true,
@@ -24,10 +25,14 @@ mongoose.connect(url,connectionParams)
 //Here we are configuring express to use body-parser as middle-ware.
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-
+// parameterLimit: 100000,
+// limit: '50mb',
+// extended: true
 
 app.post("/sendHouseDeatils",(req,res)=>{
     console.log("phoneNo",req.body.phoneNo)
+    res.send("success")
+    return
     const id = Date.now()
 
     let home = new homeDetails({
@@ -35,7 +40,7 @@ app.post("/sendHouseDeatils",(req,res)=>{
         city : req.body.city,
         propertyTitle: req.body.propertyTitle,
         location : req.body.location,
-        img: req.body.img,
+        img: req.body.imageURL,
         desc: req.body.description,
         price : req.body.price,
         bedrooms : req.body.bedrooms,
@@ -54,36 +59,51 @@ app.post("/sendHouseDeatils",(req,res)=>{
         .then(()=>console.log("home-details send to DB"))
         .catch(err=>console.log("error =>",err)) 
     
-        var found = null
-        await clientDetails.findOneAndUpdate({phoneNo:req.body.phoneNo}, {$push: { propertyIDs: id }},{new: true},(err, doc) => {
-            if (err) {
-                console.log("Something wrong when updating data!",err);
-            }else{
-                found = doc
-                console.log("property =",doc)
+        await clientDetails.findOneAndUpdate({phoneNo:req.body.phoneNo}, {$push: { propertyIDs: id }},{new: true})
+        .then(data=>{
+            console.log("res = ",data)
+            if(data == null){
+    
+                let client = new clientDetails({
+                    phoneNo : req.body.phoneNo,
+                    email : req.body.email,
+                    address : req.body.clientAddress,
+                    propertyIDs : [id]
+                }) 
+                client.save()
+                .then(()=>console.log("client-details send to DB"))
+                .catch(err=>console.log("error =>",err))
             }
-        });
+            res.send("success")
+        })
         
-        if(found == null){
-            console.log("found = ")
-
-            let client = new clientDetails({
-                phoneNo : req.body.phoneNo,
-                email : req.body.email,
-                address : req.body.clientAddress,
-                propertyIDs : [id]
-            }) 
-            client.save()
-            .then(()=>console.log("client-details send to DB"))
-            .catch(err=>console.log("error =>",err))
-        }
+        
     }
     findAndUpdate()
 
 })
 
-app.post("/addProperty",(req,res)=>{
-    console.log("res",req.body)
+app.get("/getHouseDetails",(req,res)=>{
+    homeDetails.find({},function(err, home){
+        // console.log("res",home)
+        const data = []
+        home.forEach(elem=>{
+            const obj = {
+                propertyID : elem.propertyID,
+                city : elem.city,
+                propertyTitle : elem.propertyTitle,
+                desc : elem.desc,
+                imageURL : elem.img,
+                price : elem.price,
+                bedrooms : elem.bedrooms,
+                bathrooms : elem.bathrooms,
+                rentORsale : elem.rentORsale,
+                area : elem.landArea + elem.landAreaUnit
+            }
+            data.push(obj)
+        })
+        res.send(data)
+    })
 })
 
 const port = process.env.PORT || 5000

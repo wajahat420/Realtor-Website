@@ -15,11 +15,11 @@ const UserSchema = new Schema({
       },
       img : {
             type : String,
-            // required : true
+            required : true
       },
       desc : {
             type : String,
-            // required : true
+            required : true
       },
       location : {
             type : String,
@@ -35,11 +35,11 @@ const UserSchema = new Schema({
       },
       landArea : {
             type : String,
-            required : true
+            // required : true
       },
       landAreaUnit : {
             type : String,
-            required : true
+            // required : true
       },
       rentORsale: {
             type:String,
@@ -59,7 +59,7 @@ const UserSchema = new Schema({
       },
       propertyTitle: {
             type:String,
-            // required:true
+            required:true
       },
       Date:{
             type:String,

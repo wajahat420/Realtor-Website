@@ -4,7 +4,7 @@ import Image from "../imgs/home.jpg"
 export default function  homeDIV(props) {
       return (
             <div className="col-4 position-relative m-auto p-5 m-0  home-div text-center">
-                  <img className="col-12 p-0" src={props.img}/>
+                  <img className="col-12 p-0" src={props.imageURL}/>
                   <div className="position-absolute msg">
                         <p >message</p>
                   </div>
@@ -12,7 +12,7 @@ export default function  homeDIV(props) {
                         <p>call</p>
                   </div>
                   <div className="border">
-                        <h4 className="col-12 mt-4">{props.location}</h4>
+                        <h4 className="col-12 mt-4">{props.propertyTitle}</h4>
                         <p className="col-12 p-0 explain">{props.desc}</p>
                         <div className="row p-0 m-0 ">
                               <div>
