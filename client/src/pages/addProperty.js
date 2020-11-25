@@ -34,11 +34,15 @@ export default class addProperty extends Component {
                   data: this.state
             })
             .then(res=>{
-                  // if(res.data == "success"){
-                  //       // const duplicat = {...this.state}
-                  //       this.state = this.stateCopy
-                  //       console.log("res from react",res)
-                  // }
+                  if(res.data == "success"){
+                        const keys = Object.getOwnPropertyNames(this.state)
+                        // const duplicat = {}
+                        // keys.forEach(elem=>{
+                        //       duplicat[elem] = ""
+                        // })
+                        console.log("res from react",this.stateCopy)
+                        // this.setState(this.stateCopy)
+                  }
             }).catch(err=>{
                   console.log("err",err)
             })

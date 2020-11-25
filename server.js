@@ -5,6 +5,8 @@ const bodyParser = require("body-parser")
 
 const homeDetails = require("./models/homeDetails")
 const clientDetails = require("./models/client")
+const signup = require("./models/signup")
+const signin = require("./models/signin")
 
 const url = "mongodb+srv://wajahat:node123@first.uba9r.mongodb.net/realtor?retryWrites=true&w=majority"
 // const url = "mongodb://db1.example.net:27017,db2.example.net:2500/?replicaSet=test&connectTimeoutMS=300000"
@@ -28,11 +30,46 @@ app.use(bodyParser.json());
 // parameterLimit: 100000,
 // limit: '50mb',
 // extended: true
+app.post("/signup",(req,res)=>{
+    console.log("req",req.body)
+    let signupData = new signup({
+        username : req.body.username,
+        email:req.body.email,
+        mobileNo: req.body.mobileNo,
+        password: req.body.password,
+        address: req.body.mobileNo
+    })
+    signup.find(
+        {
+            $or: [{ email: req.body.email }, { username: req.body.username }, { mobileNo: req.body.mobileNo }]
+        },function(err,data){
+            if(data.length == 0){
+                signupData.save()
+                .then(()=>console.log("signup data send to DB"))
+                .catch((err)=>console.log("error \n",err))
+            }
+        })
+})
+app.use("/signin",(req,res)=>{
+    const username = req.body.username
+    const password = req.body.password
 
+    signup.find(
+        {
+            $and: [
+                    {$or: [{ email: username }, { username: username }, { mobileNo: username }]},
+                    {password : password}
+                ],
+        },function(err,data){
+            if(data.length == 0){
+                res.send("fail")
+            }else{
+                res.send("success")
+            }
+        })
+})
 app.post("/sendHouseDeatils",(req,res)=>{
     console.log("phoneNo",req.body.phoneNo)
-    res.send("success")
-    return
     const id = Date.now()
 
     let home = new homeDetails({
