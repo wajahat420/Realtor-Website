@@ -10,6 +10,7 @@ export default class context extends Component {
             this.setState({loginUser})
       }
       render() {
+            // console.log("abc",this.state.loginUser)
             return (
                   <MyContext.Provider value={{...this.state, setLoginUser : this.setLoginUser}}>
                         {this.props.children}

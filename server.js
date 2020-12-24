@@ -3,7 +3,7 @@ app = express()
 const mongoose = require('mongoose')
 const bodyParser = require("body-parser")
 
-const homeDetails = require("./models/homeDetails")
+const homeDetails = require("./models/addProperty")
 const clientDetails = require("./models/client")
 const signup = require("./models/signup")
 const signin = require("./models/signin")
@@ -37,7 +37,7 @@ app.post("/signup",(req,res)=>{
         email:req.body.email,
         mobileNo: req.body.mobileNo,
         password: req.body.password,
-        address: req.body.mobileNo
+        address: req.body.address
     })
     signup.find(
         {
@@ -46,7 +46,12 @@ app.post("/signup",(req,res)=>{
             if(data.length == 0){
                 signupData.save()
                 .then(()=>console.log("signup data send to DB"))
-                .catch((err)=>console.log("error \n",err))
+                .catch((err)=>{
+                    console.log("error \n",err)
+                    res.send("error")
+                })
+            }else{
+                res.send("already")
             }
         })
 })
@@ -69,7 +74,8 @@ app.use("/signin",(req,res)=>{
         })
 })
 app.post("/sendHouseDeatils",(req,res)=>{
-    const id = Date.now()
+    
+    const id = parseInt(Date.now() * Math.random())
 
     let home = new homeDetails({
         propertyID :id,
@@ -88,58 +94,65 @@ app.post("/sendHouseDeatils",(req,res)=>{
         propertyTitle : req.body.propertyTitle   
     })
 
-
+    let client = new clientDetails({
+        mobileNo : req.body.phoneNo,
+        email : req.body.email,
+        CNIC : req.body.CNIC,
+        address : req.body.clientAddress,
+        propertyIDs : [{
+            realtor : req.body.realtorMobileNo ,
+            properties : [id]
+        }]
+    }) 
     // find a phone number of client in a DB if it exits then home propertyID append in the client array otherwise whole object append in client
     async function findAndUpdate(){
-        home.save()
-        .then(()=>console.log("home-details send to DB"))
-        .catch(err=>console.log("error =>",err)) 
-    
+
         await clientDetails.find({CNIC:req.body.CNIC},function(err,data){
             if(data.length == 0){
 
-                let client = new clientDetails({
-                    phoneNo : req.body.phoneNo,
-                    email : req.body.email,
-                    CNIC : req.body.CNIC,
-                    address : req.body.clientAddress,
-                    propertyIDs : [{
-                        [req.body.realtorEmail] : [id]
-                    }]
-                }) 
                 client.save()
-                .then(()=>console.log("client-details send to DB"))
-                .catch(err=>console.log("error =>",err))                
-            }else{
-                data.forEach(obj=>{
-                    // obj = obj.propertyIDs
-                    // let realtorEmail = Object.getOwnPropertyNames(obj)
-                    console.log("rel",obj)
+                .then(()=>{
+                    home.save()
+                    .then(()=>console.log("home-details send to DB"))
+                    .catch(err=>{
+                        console.log("error =>",err)
+                        res.send("error")
+                    })    
+                    console.log("new client-details send to DB")
                 })
-                console.log("else",data)
+                .catch(err=>{
+                    console.log("error =>",err)
+                    res.send("error")
+                })                
+            }else{
+                clientDetails.findOneAndUpdate(
+                    {CNIC:req.body.CNIC,"propertyIDs.realtor" : req.body.realtorMobileNo},
+                        
+                    {$push: 
+                        {"propertyIDs.$.properties" : id} 
+                    },
+                    {upsert : false},
+                    function(err,data){
+                        if(data === null){
+                            clientDetails.updateOne(
+                                {CNIC:req.body.CNIC},
+                                {$push: {propertyIDs : {
+                                    realtor : req.body.realtorMobileNo,
+                                    properties : [id]
+                                }}}
+                            )
+                            .then(()=>console.log("new realtor add existing client"))
+                            .catch(err=>{
+                                console.log("error",err)
+                                res.send("error")
+                            })
+                        }else{
+                            console.log("existing clients and realtor. array updated")
+                        }
+                    }
+                )        
             }
         })
-        // .then(data=>{
-            // console.log("res = ",data)
-            // if(data == null){
-            //     let clientID = parseInt(Date.now() * (Math.random() + 1))
-
-            //     let client = new clientDetails({
-            //         clientID,
-            //         phoneNo : req.body.phoneNo,
-            //         email : req.body.email,
-            //         CNIC : req.body.CNIC,
-            //         address : req.body.clientAddress,
-            //         propertyIDs : [{
-            //             realtorEmail : [id]
-            //         }]
-            //     }) 
-            //     client.save()
-            //     .then(()=>console.log("client-details send to DB"))
-            //     .catch(err=>console.log("error =>",err))
-            // }
-            // res.send("success")
-        // })
     }
     findAndUpdate()
 

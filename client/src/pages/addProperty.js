@@ -30,21 +30,20 @@ export default class addProperty extends Component {
             CNIC : ""
       }
       uploadData=()=>{
-            let data = this.state
-            data["realtorEmail"] = this.context.loginUser
-            console.log("dataa",data)
-            // axios({
-            //       method: 'post',
-            //       url: '/sendHouseDeatils',
-            //       data: data
-            // })
-            // .then(res=>{
-            //       if(res.data == "success"){
-            //             console.log("successfully send")
-            //       }
-            // }).catch(err=>{
-            //       console.log("err",err)
-            // })
+            let data = this.state 
+            data["realtorMobileNo"] = this.context.loginUser.mobileNo
+            axios({
+                  method: 'post',
+                  url: '/sendHouseDeatils',
+                  data: data
+            })
+            .then(res=>{
+                  if(res.data == "error"){
+                        alert("Error in sending Check your fields")
+                  }
+            }).catch(err=>{
+                  console.log("err",err)
+            })
       }
       file = (event) =>  {
             const input = event.target;
@@ -72,7 +71,6 @@ export default class addProperty extends Component {
     
         }
       render() {
-            console.log(this.state)
             return (
                   <div className="col-md-12 addProperty">
                         <div className="col-md-8 ml-auto mr-auto mt-5">

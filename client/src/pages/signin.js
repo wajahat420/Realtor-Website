@@ -12,11 +12,11 @@ export default class signin extends Component {
       AuthUser = ()=>{
             axios.post("/signin",this.state)
             .then(res=>{
-                  console.log(res.data)
-                  if(res.data === "success"){
-                        this.props.history.push("/")
+                  console.log(res.data[0])
+                  if(res.data !== "fail"){
                         // console.log("context",this.context)
-                        this.context.setLoginUser(this.state.setLoginUser(this.state))
+                        this.context.setLoginUser(res.data[0])
+                        this.props.history.push("/")
                   }
             })
             .catch(err=>console.log("error\n",err))

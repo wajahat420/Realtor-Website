@@ -11,6 +11,15 @@ export default class signup extends Component {
       }
       AuthUser = ()=>{
             axios.post("/signup",this.state)
+            .then(res=>{
+                  if(res.data === "error"){
+                        alert("Error in sending Check your fields")
+                  }else if(res.data == "already"){
+                        alert("Account already exist, change email / username / phone number")
+                  }else{
+                        this.props.history.push("/")
+                  }
+            })
       }
       render() {
             return (

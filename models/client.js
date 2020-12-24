@@ -6,7 +6,7 @@ date = date.getDate() + "/" + date.getMonth() + "/" + date.getFullYear()
 // const time = 
 
 const UserSchema = new Schema({
-      phoneNo : {
+      mobileNo : {
             type : String,
             required : true
       },
