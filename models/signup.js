@@ -20,11 +20,13 @@ const UserSchema = new Schema({
       },
       address : {
             type : String,
-            // required : true
       },
       password : {
             type : String,
             required : true
+      },
+      clientIDs : {
+            type : Array
       }
 })
 

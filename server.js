@@ -25,7 +25,7 @@ mongoose.connect(url,connectionParams)
 })
 
 //Here we are configuring express to use body-parser as middle-ware.
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: false, limit : '50mb',parameterLimit : 100000 }));
 app.use(bodyParser.json());
 // parameterLimit: 100000,
 // limit: '50mb',
@@ -64,12 +64,11 @@ app.use("/signin",(req,res)=>{
             if(data.length == 0){
                 res.send("fail")
             }else{
-                res.send("success")
+                res.send(data)
             }
         })
 })
 app.post("/sendHouseDeatils",(req,res)=>{
-    console.log("phoneNo",req.body.phoneNo)
     const id = Date.now()
 
     let home = new homeDetails({
@@ -96,25 +95,51 @@ app.post("/sendHouseDeatils",(req,res)=>{
         .then(()=>console.log("home-details send to DB"))
         .catch(err=>console.log("error =>",err)) 
     
-        await clientDetails.findOneAndUpdate({phoneNo:req.body.phoneNo}, {$push: { propertyIDs: id }},{new: true})
-        .then(data=>{
-            console.log("res = ",data)
-            if(data == null){
-    
+        await clientDetails.find({CNIC:req.body.CNIC},function(err,data){
+            if(data.length == 0){
+
                 let client = new clientDetails({
                     phoneNo : req.body.phoneNo,
                     email : req.body.email,
+                    CNIC : req.body.CNIC,
                     address : req.body.clientAddress,
-                    propertyIDs : [id]
+                    propertyIDs : [{
+                        [req.body.realtorEmail] : [id]
+                    }]
                 }) 
                 client.save()
                 .then(()=>console.log("client-details send to DB"))
-                .catch(err=>console.log("error =>",err))
+                .catch(err=>console.log("error =>",err))                
+            }else{
+                data.forEach(obj=>{
+                    // obj = obj.propertyIDs
+                    // let realtorEmail = Object.getOwnPropertyNames(obj)
+                    console.log("rel",obj)
+                })
+                console.log("else",data)
             }
-            res.send("success")
         })
-        
-        
+        // .then(data=>{
+            // console.log("res = ",data)
+            // if(data == null){
+            //     let clientID = parseInt(Date.now() * (Math.random() + 1))
+
+            //     let client = new clientDetails({
+            //         clientID,
+            //         phoneNo : req.body.phoneNo,
+            //         email : req.body.email,
+            //         CNIC : req.body.CNIC,
+            //         address : req.body.clientAddress,
+            //         propertyIDs : [{
+            //             realtorEmail : [id]
+            //         }]
+            //     }) 
+            //     client.save()
+            //     .then(()=>console.log("client-details send to DB"))
+            //     .catch(err=>console.log("error =>",err))
+            // }
+            // res.send("success")
+        // })
     }
     findAndUpdate()
 

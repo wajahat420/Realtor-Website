@@ -1,16 +1,16 @@
 const mongoose = require("mongoose")
 const Schema = mongoose.Schema
 
-const a  = new Date()
-const date = a.getDate() + "/" + a.getMonth() + "/" + a.getFullYear()
+let date  = new Date()
+date = date.getDate() + "/" + date.getMonth() + "/" + date.getFullYear()
 // const time = 
 
 const UserSchema = new Schema({
-      clientID : {
-            type : String,
-            default : parseInt(Date.now() * (Math.random() + 1))
-      },
       phoneNo : {
+            type : String,
+            required : true
+      },
+      CNIC : {
             type : String,
             required : true
       },

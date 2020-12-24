@@ -1,8 +1,10 @@
 import axios from "axios"
 import React, { Component } from 'react'
+import { MyContext } from "../context/context"
 import "../css/addProperty.css"
 
 export default class addProperty extends Component {
+      static contextType = MyContext
       constructor(){
             super()
             this.count = [1,2,3,4,5,6,7,8,9,10]
@@ -24,28 +26,25 @@ export default class addProperty extends Component {
             phoneNo:  "",
             email : "",
             clientAddress : "",
-            imageURL : ''
+            imageURL : '',
+            CNIC : ""
       }
       uploadData=()=>{
-            console.log("jjj")
-            axios({
-                  method: 'post',
-                  url: '/sendHouseDeatils',
-                  data: this.state
-            })
-            .then(res=>{
-                  if(res.data == "success"){
-                        const keys = Object.getOwnPropertyNames(this.state)
-                        // const duplicat = {}
-                        // keys.forEach(elem=>{
-                        //       duplicat[elem] = ""
-                        // })
-                        console.log("res from react",this.stateCopy)
-                        // this.setState(this.stateCopy)
-                  }
-            }).catch(err=>{
-                  console.log("err",err)
-            })
+            let data = this.state
+            data["realtorEmail"] = this.context.loginUser
+            console.log("dataa",data)
+            // axios({
+            //       method: 'post',
+            //       url: '/sendHouseDeatils',
+            //       data: data
+            // })
+            // .then(res=>{
+            //       if(res.data == "success"){
+            //             console.log("successfully send")
+            //       }
+            // }).catch(err=>{
+            //       console.log("err",err)
+            // })
       }
       file = (event) =>  {
             const input = event.target;
@@ -169,6 +168,10 @@ export default class addProperty extends Component {
                                     </div>
                               </div>
                               <div className="row">   
+                                    <span className="col-3"><p>CNIC</p></span>
+                                    <input onChange={(e)=>this.setState({CNIC:e.target.value})} type="text" className="input" />
+                              </div>
+                              <div className="row">   
                                     <span className="col-3"><p>Phone no.</p></span>
                                     <input onChange={(e)=>this.setState({phoneNo:e.target.value})} type="text" className="input" />
 
@@ -184,12 +187,12 @@ export default class addProperty extends Component {
 
                               </div>
                               <div>
-                                    <input type="button" value="Send" className="btn btn-primary" onClick={this.uploadData}/>
-                                    
-                              </div>
-                              <div>
                                     <input onChange={this.file} type="file"/>
                                     <img src={this.state.imageURL}/>
+                              </div>
+                              <div>
+                                    <input type="button" value="Send" className="btn btn-primary" onClick={this.uploadData}/>
+                                    
                               </div>
                         </div>
                   </div>

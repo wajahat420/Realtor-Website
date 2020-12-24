@@ -1,7 +1,7 @@
 import '../css/App.css';
 import Logo from "../imgs/realtor_logo.jpg"
-
-function App() {
+import {NavLink} from "react-router-dom"
+function App(props) {
   return (
     <div className="App">
 
@@ -59,22 +59,16 @@ function App() {
                         <li className=""><a>Item 2</a></li>
                     </ul>
                 </li>
-       
+                <li className="nav-item">
+                    <NavLink to="/signin" className="nav-link page-scroll" >Login</NavLink>
+                </li>               
+                <li className="nav-item">
+                    <NavLink to="/signup" className="nav-link page-scroll" >Signup</NavLink>
+                </li>                
+                <li className="nav-item">
+                    <NavLink to="/addProperty" className="nav-link page-scroll" >Add Property</NavLink>
+                </li>
             </ul>
-            {/* <span className="nav-item social-icons">
-                <span className="fa-stack">
-                    <a href="#your-link">
-                        <i className="fas fa-circle fa-stack-2x facebook"></i>
-                        <i className="fab fa-facebook-f fa-stack-1x"></i>
-                    </a>
-                </span>
-                <span className="fa-stack">
-                    <a href="#your-link">
-                        <i className="fas fa-circle fa-stack-2x twitter"></i>
-                        <i className="fab fa-twitter fa-stack-1x"></i>
-                    </a>
-                </span>
-            </span> */}
         </div>
     </nav> 
 

@@ -1,7 +1,10 @@
 import axios from 'axios'
 import React, { Component } from 'react'
+import { MyContext } from '../context/context'
 
 export default class signin extends Component {
+      static contextType = MyContext
+
       state = {
             username:  "",
             password : ""
@@ -9,7 +12,12 @@ export default class signin extends Component {
       AuthUser = ()=>{
             axios.post("/signin",this.state)
             .then(res=>{
-                  console.log(res)
+                  console.log(res.data)
+                  if(res.data === "success"){
+                        this.props.history.push("/")
+                        // console.log("context",this.context)
+                        this.context.setLoginUser(this.state.setLoginUser(this.state))
+                  }
             })
             .catch(err=>console.log("error\n",err))
       }
