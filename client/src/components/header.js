@@ -14,13 +14,13 @@ function App(props) {
             </span>
             <ul className="navbar-nav ">
                 <li className="nav-item">
-                    <a className="nav-link page-scroll" href="#header">Home <span className="sr-only">(current)</span></a>
-                    <ul className="">
+                    <NavLink to="/" className="nav-link page-scroll" >Home</NavLink>
+                    {/* <ul className="">
                         <li className=""><a>Item 1</a></li>
                         <li className=""><a>Item 2</a></li>
                         <li className=""><a>Item 2</a></li>
                         <li className=""><a>Item 2</a></li>
-                    </ul>
+                    </ul> */}
 
                 </li>
                 <li className="nav-item">

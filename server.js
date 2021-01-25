@@ -91,8 +91,7 @@ app.post("/sendHouseDeatils",(req,res)=>{
         landAreaUnit : req.body.landAreaUnit,
         rentORsale : req.body.rentORsale,
         propertyType : req.body.propertyType,
-        propertyTitle : req.body.propertyTitle   
-    })
+        })
 
     let client = new clientDetails({
         mobileNo : req.body.phoneNo,
@@ -159,6 +158,7 @@ app.post("/sendHouseDeatils",(req,res)=>{
 })
 
 app.get("/getHouseDetails",(req,res)=>{
+    console.log("backend")
     homeDetails.find({},function(err, home){
         // console.log("res",home)
         const data = []
