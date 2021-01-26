@@ -9,6 +9,7 @@ import Signin from "./pages/login/login"
 import AddProperty from "./pages/addProperty/addProperty"
 import Signup from "./pages/signup/signup"
 import Header from "./components/header"
+import HomeDetail from "./pages/homeDetail/homeDetail"
 
 export default function App() {
     return (
@@ -20,6 +21,7 @@ export default function App() {
                 <Route exact path = "/addProperty" component = {AddProperty} />
                 <Route path = "/signin" component = {Signin} />
                 <Route path = "/signup" component = {Signup} />
+                <Route path = "/homeDetail" component = {HomeDetail} />
 
             </div>
     )

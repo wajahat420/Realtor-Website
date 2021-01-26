@@ -1,0 +1,38 @@
+.home-detail{
+    text-align: center;
+    /* margin: auto; */
+}
+.home-detail img{
+    width: 100%;
+}
+.button-class{
+    background-color:  #009600;
+    border-radius: 7px;
+    padding : 10px 0px;
+}
+.message input{
+    padding: 10px;
+    font-size: 15px;
+    border: 1px solid gray;
+    margin : 10px 0px
+}
+.message input::placeholder{
+    color: rgb(117, 115, 115);
+}
+.message .msgTxt{
+    padding-bottom: 30px;
+}
+.message input[type="button"]{
+    background-color: rgb(0, 88, 0);
+    color: white;
+}
+.overview{
+    color: black;
+}
+.overview .heading{
+    font-size: 19px;
+    padding: 10px 0px;
+}
+.overview table td{
+    padding: 10px;
+}
