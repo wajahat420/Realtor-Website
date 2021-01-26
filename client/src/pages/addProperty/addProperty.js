@@ -24,8 +24,8 @@ export default class signup extends React.Component {
         propertyTitle :"",
         description : "",
         price : "",
-        landArea : "",
         landAreaUnit : "Sq Yd",
+        area : "",
         bedrooms : "",
         bathrooms: "",
         expiresAfter: "1 month",
@@ -39,18 +39,22 @@ export default class signup extends React.Component {
     uploadData=()=>{
         let data = this.state 
         data["realtorMobileNo"] = this.context.loginUser.mobileNo
-        axios({
-            method: 'post',
-            url: '/sendHouseDeatils',
-            data: data
-        })
-        .then(res=>{
-            if(res.data == "error"){
-                    alert("Error in sending Check your fields")
-            }
-        }).catch(err=>{
-            console.log("err",err)
-        })
+        data["area"] = this.state.area + " "+this.state.landAreaUnit
+        // axios({
+        //     method: 'post',
+        //     url: '/sendHouseDeatils',
+        //     data: data
+        // })
+        // .then(res=>{
+        //     if(res.data == "error"){
+        //             alert("Error in sending Check your fields")
+        //     }
+        // }).catch(err=>{
+        //     console.log("err",err)
+        // })
+        const allHomes = [...this.context.homesDetails]
+        allHomes.push(data)
+        this.context.setAllHouses(allHomes)
     }
      file = (event) =>  {
         const input = event.target;
@@ -87,7 +91,7 @@ export default class signup extends React.Component {
                 <div class="card-heading"></div>
                 <div class="card-body">
                     <h2 class="title">Registration Info</h2>
-                    <form method="POST">
+                    <div>
                         <div class="input-group">
                             <input onChange={(e)=>this.setState({clientName:e.target.value})} class="input--style-1" type="text" placeholder="Client Name" name="name"/>
                         </div>
@@ -104,7 +108,7 @@ export default class signup extends React.Component {
                         <div class="row row-space">
                             <div class="col-3">
                                 <div class="input-group">
-                                    <input onChange={(e)=>this.setState({landArea:e.target.value})} class="input--style-1 js-datepicker" type="text" placeholder="Area" name="birthday"/>
+                                    <input onChange={(e)=>this.setState({area:e.target.value})} class="input--style-1 js-datepicker" type="text" placeholder="Area" name="birthday"/>
                                     <i class="zmdi zmdi-calendar-note input-icon js-btn-calendar"></i>
                                 </div>
                             </div>
@@ -116,7 +120,7 @@ export default class signup extends React.Component {
                                             this.setState({landAreaUnit : e.target.value})
                                         }}>
                                             <option disabled="disabled" selected="selected">Unit</option>
-                                            <option value="sq. ft">Sq. ft</option>
+                                            <option value="Sq. YD">Sq. Yd</option>
                                             <option value="marla">Marla</option>
                                         </select>
                                         <div class="select-dropdown"></div>
@@ -208,10 +212,10 @@ export default class signup extends React.Component {
                             </div>
                         </div>
                         <div class="p-t-20">
-                            <button onClick={this.uploadData} class="btn btn--radius btn--green" type="submit">Submit</button>
+                            <button onClick={this.uploadData} class="btn btn--radius btn--green" type="button">Submit</button>
                         </div>
 
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>

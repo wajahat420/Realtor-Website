@@ -1,7 +1,20 @@
 import React from 'react'
 import "./css/style.css"
+import axios from "axios"
 
 export default function login() {
+    const AuthUser = ()=>{
+        axios.post("/signin",this.state)
+        .then(res=>{
+              console.log(res.data[0])
+              if(res.data !== "fail"){
+                    // console.log("context",this.context)
+                    this.context.setLoginUser(res.data[0])
+                    this.props.history.push("/")
+              }
+        })
+        .catch(err=>console.log("error\n",err))
+    }
     return (
         <>
             <div class="body"></div>

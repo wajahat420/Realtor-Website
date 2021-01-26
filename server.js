@@ -6,8 +6,7 @@ const bodyParser = require("body-parser")
 const homeDetails = require("./models/addProperty")
 const clientDetails = require("./models/client")
 const signup = require("./models/signup")
-const signin = require("./models/signin")
-
+    
 const url = "mongodb+srv://wajahat:node123@first.uba9r.mongodb.net/realtor?retryWrites=true&w=majority"
 // const url = "mongodb://db1.example.net:27017,db2.example.net:2500/?replicaSet=test&connectTimeoutMS=300000"
 const connectionParams={
@@ -177,6 +176,7 @@ app.get("/getHouseDetails",(req,res)=>{
             }
             data.push(obj)
         })
+        console.log(data)
         res.send(data)
     })
 })

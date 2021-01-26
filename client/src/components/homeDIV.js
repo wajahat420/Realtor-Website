@@ -4,13 +4,13 @@ import Image from "../imgs/home.jpg"
 export default function  homeDIV(props) {
       return (
             <div className="col-4 position-relative m-auto p-5 m-0  home-div text-center">
-                  <img className="col-12 p-0" src={props.imageURL}/>
-                  <div className="position-absolute msg">
+                  <img  onClick={()=>props.clicked()} className="col-12 p-0" src={props.imageURL}/>
+                  {/* <div className="position-absolute msg">
                         <p >message</p>
                   </div>
                   <div className="position-absolute call">
                         <p>call</p>
-                  </div>
+                  </div> */}
                   <div className="border">
                         <h4 className="col-12 mt-4">{props.propertyTitle}</h4>
                         <p className="col-12 p-0 explain">{props.desc}</p>
