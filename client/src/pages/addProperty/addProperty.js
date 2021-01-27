@@ -53,8 +53,12 @@ export default class signup extends React.Component {
         //     console.log("err",err)
         // })
         const allHomes = [...this.context.homesDetails]
+        const leads = [...this.context.leads]
         allHomes.push(data)
+        leads.push(data)
         this.context.setAllHouses(allHomes)
+        this.context.setLeads(leads)
+        this.props.history.push("/")
     }
      file = (event) =>  {
         const input = event.target;
@@ -82,7 +86,7 @@ export default class signup extends React.Component {
 
     }
     render(){
-        console.log(this.state)
+        // console.log(this.state)
     
     return (
         <div class="page-wrapper bg-blue p-t-100 p-b-100 font-robo">
@@ -224,3 +228,4 @@ export default class signup extends React.Component {
 
     )}
 }
+

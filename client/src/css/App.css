@@ -82,7 +82,9 @@ a{
 .search .status button{
   height: 100%;
 }
-
+.search p, .search button {
+  color:  black;
+}
 .switch {
   position: absolute;
   right: 0;

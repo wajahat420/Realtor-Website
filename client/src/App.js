@@ -9,7 +9,9 @@ import Signin from "./pages/login/login"
 import AddProperty from "./pages/addProperty/addProperty"
 import Signup from "./pages/signup/signup"
 import Header from "./components/header"
-import HomeDetail from "./pages/homeDetail/homeDetail"
+import HomeDetail from "./pages/homeDetails/homeDetais"
+import Leads from "./pages/leads/leads"
+import LeadDetails from "./pages/leadsDetail/leadsDetail"
 
 export default function App() {
     return (
@@ -22,6 +24,8 @@ export default function App() {
                 <Route path = "/signin" component = {Signin} />
                 <Route path = "/signup" component = {Signup} />
                 <Route path = "/homeDetail" component = {HomeDetail} />
+                <Route path = "/leads" component = {Leads} />
+                <Route path = "/leadDetails" component = {LeadDetails} />
 
             </div>
     )

@@ -23,41 +23,44 @@ function App(props) {
                     </ul> */}
 
                 </li>
-                <li className="nav-item">
-                    <a className="nav-link page-scroll" href="#services">BUY</a>
-                    <ul className="">
+                {/* <li className="nav-item">
+                    <a className="nav-link page-scroll" href="#services">BUY</a> */}
+                    {/* <ul className="">
                         <li className=""><a>Item 1</a></li>
                         <li className=""><a>Item 2</a></li>
                         <li className=""><a>Item 2</a></li>
                         <li className=""><a>Item 2</a></li>
-                    </ul>
+                    </ul> */}
+                {/* </li> */}
+                {/* <li className="nav-item">
+                    <a className="nav-link page-scroll" href="#pricing">SELL</a> */}
+                    {/* <ul className="">
+                        <li className=""><a>Item 1</a></li>
+                        <li className=""><a>Item 2</a></li>
+                        <li className=""><a>Item 2</a></li>
+                        <li className=""><a>Item 2</a></li>
+                    </ul> */}
+                {/* </li> */}
+                {/* <li className="nav-item">
+                    <a className="nav-link page-scroll" href="#request">RENT</a> */}
+                    {/* <ul className="">
+                        <li className=""><a>Item 1</a></li>
+                        <li className=""><a>Item 2</a></li>
+                        <li className=""><a>Item 2</a></li>
+                        <li className=""><a>Item 2</a></li>
+                    </ul> */}
+                {/* </li> */}
+                <li className="nav-item">
+                    <NavLink to="/leads" className="nav-link page-scroll" >Leads</NavLink>
+                    {/* <ul className="">
+                        <li className=""><a>Item 1</a></li>
+                        <li className=""><a>Item 2</a></li>
+                        <li className=""><a>Item 2</a></li>
+                        <li className=""><a>Item 2</a></li>
+                    </ul> */}
                 </li>
                 <li className="nav-item">
-                    <a className="nav-link page-scroll" href="#pricing">SELL</a>
-                    <ul className="">
-                        <li className=""><a>Item 1</a></li>
-                        <li className=""><a>Item 2</a></li>
-                        <li className=""><a>Item 2</a></li>
-                        <li className=""><a>Item 2</a></li>
-                    </ul>
-                </li>
-                <li className="nav-item">
-                    <a className="nav-link page-scroll" href="#request">RENT</a>
-                    <ul className="">
-                        <li className=""><a>Item 1</a></li>
-                        <li className=""><a>Item 2</a></li>
-                        <li className=""><a>Item 2</a></li>
-                        <li className=""><a>Item 2</a></li>
-                    </ul>
-                </li>
-                <li className="nav-item">
-                    <a className="nav-link page-scroll" href="#request">LEADS</a>
-                    <ul className="">
-                        <li className=""><a>Item 1</a></li>
-                        <li className=""><a>Item 2</a></li>
-                        <li className=""><a>Item 2</a></li>
-                        <li className=""><a>Item 2</a></li>
-                    </ul>
+                    <NavLink to="/addProperty" className="nav-link page-scroll" >Add Property</NavLink>
                 </li>
                 <li className="nav-item">
                     <NavLink to="/signin" className="nav-link page-scroll" >Login</NavLink>
@@ -65,9 +68,6 @@ function App(props) {
                 <li className="nav-item">
                     <NavLink to="/signup" className="nav-link page-scroll" >Signup</NavLink>
                 </li>                
-                <li className="nav-item">
-                    <NavLink to="/addProperty" className="nav-link page-scroll" >Add Property</NavLink>
-                </li>
             </ul>
         </div>
     </nav> 

@@ -23,16 +23,23 @@ export default class signup extends React.Component {
         password : ""
     }
     AuthUser = ()=>{
-        axios.post("/signup",this.state)
-        .then(res=>{
-              if(res.data === "error"){
-                    alert("Error in sending Check your fields")
-              }else if(res.data == "already"){
-                    alert("Account already exist, change email / username / phone number")
-              }else{
-                    this.props.history.push("/")
-              }
-        })
+        const {username, email, mobileNo, address, password} = this.state
+        if(username == "" || email == "" || mobileNo == "" || password == "" || address == ""){
+            alert("Kindly enter all fields.")
+        }else{
+            this.context.setSignupUser(this.state)
+            this.props.history.push("/")
+        }
+        // axios.post("/signup",this.state)
+        // .then(res=>{
+        //       if(res.data === "error"){
+        //             alert("Error in sending Check your fields")
+        //       }else if(res.data == "already"){
+        //             alert("Account already exist, change email / username / phone number")
+        //       }else{
+        //             this.props.history.push("/")
+        //       }
+        // })
     }
     render(){
     console.log(this.state)
@@ -44,7 +51,7 @@ export default class signup extends React.Component {
                 <div class="card-heading"></div>
                 <div class="card-body">
                     <h2 class="title">Registration Info</h2>
-                    <form method="POST">
+                    <div>
                         <div class="input-group">
                             <input onChange={(e)=>this.setState({username:e.target.value})} class="input--style-1" type="text" placeholder="Username" name="name"/>
                         </div>
@@ -62,10 +69,10 @@ export default class signup extends React.Component {
                         </div>
                         
                         <div class="p-t-20">
-                            <button onClick={this.uploadData} class="btn btn--radius btn--green" type="submit">Submit</button>
+                            <button onClick={this.AuthUser} class="btn btn--radius btn--green" type="submit">Submit</button>
                         </div>
 
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>

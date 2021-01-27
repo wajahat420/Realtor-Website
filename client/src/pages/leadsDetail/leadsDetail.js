@@ -83,6 +83,8 @@ export default class homeDetail extends Component {
 
                         <input onClick={()=>{
                             const allHomes = [...this.context.homesDetails]
+                            const leads = [...this.context.leads]
+
                             allHomes.forEach((elem, index)=>{
 
                                 if(home.id === elem.id){
@@ -90,9 +92,16 @@ export default class homeDetail extends Component {
                                     this.props.history.push("/")
                                 }   
                             })
+                            leads.forEach((elem, index)=>{
+
+                                if(home.id === elem.id){
+                                    leads.splice(index,1)
+                                    this.props.history.push("/")
+                                }   
+                            })
                             // console.log("details",allHomes)
                             this.context.setAllHouses(allHomes)
-                            // this.setState({showDelete : false})
+                            this.context.setLeads(leads)
                             this.props.history.push("/")
                         }} type="button" value="Yes"/>
                     </div>
